@@ -1,30 +1,42 @@
-
-document.querySelector('.search').addEventListener('click', function(){
-  
-  var cityName = document.querySelector('#city-name').value;
+document.querySelector('.search').addEventListener('click', function(event) {
+  event.preventDefault();
+  const cityName = document.querySelector('#city-name').value;
 
   if (!cityName) {
     alert("Please enter city name");
     return;
   }
 
-  fetchWeather(cityName)
+  fetchWeather(cityName);
+  document.querySelector('#city-name').value = "";
+});
 
-  document.querySelector('#city-name').value = ""
-})
+const fetchWeather = function(cityName) {
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=6b1b3ebef7a7e650e8bff4f1b84115be&units=imperial`;
 
-var fetchWeather = function(cityName){
-  const url = "";
-
-  fetch(url, {
-    method: 'GET',
-    dataType: 'JSON'
-    })
-    .then(data => data.json())
+  fetch(url, { method: 'GET' })
+    .then(response => response.json())
     .then(data => addWeather(data))
-  
-}
+    
+};
 
-var addWeather = function(data){
+const addWeather = (data) => {
+  const weatherInfo = {
+    conditions: data.weather[0].description || null,
+    temperature: `${data.main.temp}°F` || null,
+    icon_url: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png` || null,
+    day: new Date(data.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' }) || null
+  };
+
+  const template = `
+    <div class="col-md-2 col-sm-4 weather-card">
+      <p>${weatherInfo.conditions}</p>
+      <h3>${weatherInfo.temperature}</h3>
+      <img src="${weatherInfo.icon_url}" alt="${weatherInfo.conditions}" class="weather-icon">
+      <p><strong>${weatherInfo.day}</strong></p>
+    </div>`;
+
   
-}
+  
+    document.getElementById("forecast-cards").insertAdjacentHTML("beforeend", template);
+};
