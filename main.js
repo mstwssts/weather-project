@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 79f34f9e5c02630a6dc6e23ae59167aac041a5ac
 document.querySelector('.search').addEventListener('click', function(event) {
   event.preventDefault();
   const cityName = document.querySelector('#city-name').value;
@@ -13,13 +16,18 @@ document.querySelector('.search').addEventListener('click', function(event) {
 });
 
 const fetchWeather = function(cityName) {
+<<<<<<< HEAD
   const apiKey = `6b1b3ebef7a7e650e8bff4f1b84115be`
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
+=======
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=6b1b3ebef7a7e650e8bff4f1b84115be&units=imperial`;
+>>>>>>> 79f34f9e5c02630a6dc6e23ae59167aac041a5ac
 
   fetch(url, { method: 'GET' })
     .then(response => response.json())
     .then(data => addWeather(data))
     
+<<<<<<< HEAD
   const fiveDayForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}&units=imperial`
 
   fetch(fiveDayForecast, {method: 'GET'})
@@ -75,3 +83,27 @@ const addForecast = (data) => {
     forecastContainer.insertAdjacentHTML("beforeend", forecastTemplate); 
   }
 }
+=======
+};
+
+const addWeather = (data) => {
+  const weatherInfo = {
+    conditions: data.weather[0].description || null,
+    temperature: `${data.main.temp}°F` || null,
+    icon_url: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png` || null,
+    day: new Date(data.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' }) || null
+  };
+
+  const template = `
+    <div class="col-md-2 col-sm-4 weather-card">
+      <p>${weatherInfo.conditions}</p>
+      <h3>${weatherInfo.temperature}</h3>
+      <img src="${weatherInfo.icon_url}" alt="${weatherInfo.conditions}" class="weather-icon">
+      <p><strong>${weatherInfo.day}</strong></p>
+    </div>`;
+
+  
+  
+    document.getElementById("forecast-cards").insertAdjacentHTML("beforeend", template);
+};
+>>>>>>> 79f34f9e5c02630a6dc6e23ae59167aac041a5ac
