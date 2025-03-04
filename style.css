@@ -10,7 +10,6 @@ body {
   width: 275px;
 }
 .weather-icon {
-<<<<<<< HEAD
   font-size: 40px;
 }
 .forecast-card {
@@ -21,7 +20,4 @@ body {
   background-color: rgb(161, 252, 217);
   width: 275px;
   margin: 10px 10px;
-=======
-  font-size: 40px; 
->>>>>>> 79f34f9e5c02630a6dc6e23ae59167aac041a5ac
 }
