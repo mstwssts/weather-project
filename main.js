@@ -64,11 +64,11 @@ const addForecast = (data) => {
     };
 
     const forecastTemplate = `
-      <div class="col-md-2 col-sm-4 forecast-card">
+      <div class=" col-sm-4 forecast-card">
         <p>${forecastInfo.conditions}</p>
         <h3>${forecastInfo.temperature}</h3>
         <img src="${forecastInfo.icon_url}" alt="${forecastInfo.conditions}" class="weather-icon">
-        <p><strong>${forecastInfo.day}</strong></p>
+        <p>${forecastInfo.day}</p>
       </div>`;
 
     forecastContainer.insertAdjacentHTML("beforeend", forecastTemplate); 
